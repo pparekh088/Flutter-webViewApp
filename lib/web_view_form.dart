@@ -31,7 +31,7 @@ class MyCustomFormState extends State<WebViewForm> {
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: RaisedButton(onPressed: (){
               if(_formKey.currentState.validate()){
-                
+
               }
             }),
           )
@@ -39,5 +39,4 @@ class MyCustomFormState extends State<WebViewForm> {
       ),
     );
   }
-
 }

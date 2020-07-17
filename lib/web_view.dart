@@ -4,27 +4,31 @@ import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class MyWebView extends StatelessWidget {
-  final String title;
-  final String selectedUrl;
+  static const routeName = '/MyWebView';
 
-  final Completer<WebViewController> _controller = Completer<WebViewController>();
+  final Completer<WebViewController> _controller =
+      Completer<WebViewController>();
 
-  MyWebView({
-    @required this.title,
-    @required this.selectedUrl
-  });
+  @override
+  Widget build(BuildContext context) {
+    final ScreenArguments args = ModalRoute.of(context).settings.arguments;
 
-  @override 
-  Widget build(BuildContext context){
     return Scaffold(
-      appBar: AppBar(title: Text(title)),
+      appBar: AppBar(title: Text(args.title)),
       body: WebView(
-        initialUrl: selectedUrl,
+        initialUrl: args.url,
         javascriptMode: JavascriptMode.unrestricted,
-        onWebViewCreated: (WebViewController webViewController){
-          _controller.complete(webViewController); 
+        onWebViewCreated: (WebViewController webViewController) {
+          _controller.complete(webViewController);
         },
       ),
     );
   }
+}
+
+class ScreenArguments {
+  final String title;
+  final String url;
+
+  ScreenArguments(this.title, this.url);
 }
